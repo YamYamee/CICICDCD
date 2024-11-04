@@ -47,7 +47,7 @@ jobs:
     - name: docker Hub push
       run: docker push ${{ secrets.DOCKER_USERNAME }}/github-actions-demo
 
-    # 6. EC2에서 새로운 컨테이너 실행!
+    # 6. EC2에서 새로운 컨테이너 실행!!
     - name: Execute commands on EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
