@@ -63,13 +63,14 @@ jobs:
           host: ${{ secrets.EC2_HOST }} # EC2 인스턴스의 IP 주소 또는 호스트명
           username: ${{ secrets.EC2_USER }} # EC2 SSH 사용자 이름
           key: ${{ secrets.SSH_KEY }} # GitHub Secrets에 저장된 SSH 개인 키
+          port: 22
           script: |
             # 1. 기존 Docker 컨테이너 중지 및 삭제
-            docker stop my-container || true
-            docker rm my-container || true
+            sudo docker stop my-container || true
+            sudo docker rm my-container || true
 
             # 2. Docker Hub에서 최신 이미지 pull
-            docker pull ${{ secrets.DOCKER_USERNAME }}/github-actions-demo
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/github-actions-demo
 
             # 3. 새로운 컨테이너 실행
-            docker run -d --name my-container -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/github-actions-demo
+            sudo docker run -d --name my-container -p 8080:8080 ${{ secrets.DOCKER_USERNAME }}/github-actions-demo
